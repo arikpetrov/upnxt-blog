@@ -36,6 +36,8 @@ header {
     background: @blue-drk;
     overflow: auto;
 
+
+
     &:after {
         .clear-after();
     }
@@ -52,6 +54,12 @@ header {
 
         li {
             float: left;
+        }
+
+        @media only screen and (max-width: 480px) {
+            float: none; width: 100%; max-width: 100%; li {
+                width: 100%;
+            }
         }
     }
 
@@ -90,6 +98,12 @@ header {
                 }
             }
         }
+
+        @media only screen and (max-width: 480px) {
+            float: none; width: 100%; max-width: 100%; li {
+                width: 100%;
+            }
+        }
     }
 
     div {
@@ -122,6 +136,15 @@ main {
             font-family: 'Lato';
             font-weight: 300;
         }
+
+        @media only screen and (max-width: 480px) {
+
+            padding: 60px 0; h1 {
+                font-size: 1em;
+                width: 90%;
+                font-weight: 600;
+            }
+        }
     }
 
     section {
@@ -129,6 +152,10 @@ main {
         margin: 0 auto;
         padding: 3em 0;
         position: relative;
+
+        @media only screen and (max-width: 480px) {
+            width: auto; padding: 3em 1em;
+        }
 
         h1 {
             font-weight: 300;
@@ -158,11 +185,11 @@ main {
             margin-top: 1.8em;
         }
 
-        p.date {
-            text-align: center;
-            font-size: 18px;
-            color: #999;
-        }
+            p.date {
+                text-align: center;
+                font-size: 18px;
+                color: #999;
+            }
 
         a.ref {
             text-decoration: none;
@@ -208,6 +235,40 @@ main {
 
             span.tag {
                 color: #30c4ff;
+            }
+        }
+
+        ol.code {
+            display: block;
+            padding: 12px;
+            list-style: none;
+            background: #141414;
+            border: 1px solid #141414;
+            overflow: auto;
+
+            li {
+                display: block;
+
+
+                &.tab-1 {
+                    padding-left: @tab;
+                }
+
+                &.tab-2 {
+                    padding-left: @tab * 2;
+                }
+
+                &.tab-3 {
+                    padding-left: @tab * 3;
+                }
+
+                &.tab-4 {
+                    padding-left: @tab * 4;
+                }
+
+                &.tab-5 {
+                    padding-left: @tab * 5;
+                }
             }
         }
 
@@ -344,6 +405,10 @@ footer {
 
         aside {
             float: left;
+
+            @media only screen and (max-width: 480px) {
+                float: none;
+            }
 
             &:first-child {
                 width: 300px;

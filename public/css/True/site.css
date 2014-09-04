@@ -2628,6 +2628,18 @@ header ul li {
     float: left;
 }
 
+@media only screen and (max-width: 480px) {
+    header ul {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    header ul li {
+        width: 100%;
+    }
+}
+
 header a {
     color: #fff;
     padding: 28px 22px;
@@ -2661,6 +2673,18 @@ header #social li a i {
     font-size: 18px;
 }
 
+@media only screen and (max-width: 480px) {
+    header #social {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    header #social li {
+        width: 100%;
+    }
+}
+
 header div {
     background: url("/images/shattered.png");
     clear: both;
@@ -2690,11 +2714,30 @@ main header h1 {
     font-weight: 300;
 }
 
+@media only screen and (max-width: 480px) {
+    main header {
+        padding: 60px 0;
+    }
+
+    main header h1 {
+        font-size: 1em;
+        width: 90%;
+        font-weight: 600;
+    }
+}
+
 main section {
     width: 800px;
     margin: 0 auto;
     padding: 3em 0;
     position: relative;
+}
+
+@media only screen and (max-width: 480px) {
+    main section {
+        width: auto;
+        padding: 3em 1em;
+    }
 }
 
 main section h1 {
@@ -2704,6 +2747,11 @@ main section h1 {
 
 main section h2 {
     padding-top: 2em;
+}
+
+main section h2 i {
+    padding-right: 8px;
+    color: red;
 }
 
 main section blockquote {
@@ -2782,10 +2830,10 @@ main section span.file span.fn {
     color: #90ee90;
 }
 
-main section ol.code i,
-main section span.code i,
-main section span.file i {
-    padding-right: 4px;
+main section ol.code span.tag,
+main section span.code span.tag,
+main section span.file span.tag {
+    color: #30c4ff;
 }
 
 main section ol.code {
@@ -2794,6 +2842,7 @@ main section ol.code {
     list-style: none;
     background: #141414;
     border: 1px solid #141414;
+    overflow: auto;
 }
 
 main section ol.code li {
@@ -2816,42 +2865,81 @@ main section ol.code li.tab-4 {
     padding-left: 80px;
 }
 
-main section ol.html li {
-    color: #30c4ff;
+main section ol.code li.tab-5 {
+    padding-left: 100px;
 }
 
-main section .tag {
-    color: #30c4ff;
+main section span.inline span.at,
+main section span.inline span.p,
+main section span.inline span.fn,
+main section span.inline span.tag {
+    color: #5e5e5d;
 }
 
-main section aside.callout {
+main section i {
+    padding-right: 4px;
+}
+
+main ol.code {
+    display: block;
+    padding: 12px;
+    list-style: none;
+    background: #141414;
+    border: 1px solid #141414;
+}
+
+main ol.code li {
+    display: block;
+}
+
+main ol.code li.tab-1 {
+    padding-left: 20px;
+}
+
+main ol.code li.tab-2 {
+    padding-left: 40px;
+}
+
+main ol.code li.tab-3 {
+    padding-left: 60px;
+}
+
+main ol.code li.tab-4 {
+    padding-left: 80px;
+}
+
+main ol.code li.tab-5 {
+    padding-left: 100px;
+}
+
+main aside.callout {
     display: inline-block;
     padding: 18px;
     border: 2px solid #e1e1e1;
     background: #fff;
 }
 
-main section.references ol {
+section.references ol {
     padding-left: 1.3em;
 }
 
-main section.references ul {
+section.references ul {
     list-style: none;
     padding: 0;
 }
 
-main section.references h2 i {
+section.references h2 i {
     padding-right: 8px;
 }
 
-main nav {
+nav {
     font-family: 'Lato';
     font-weight: 300;
     background-color: #e6e5e5;
     padding: 2em 0 4em 0;
 }
 
-main nav:after {
+nav:after {
     content: ' ';
     display: block;
     visibility: hidden;
@@ -2859,29 +2947,29 @@ main nav:after {
     clear: both;
 }
 
-main nav a {
+nav a {
     font-size: 1.4em;
     color: #666;
 }
 
-main nav a:hover {
+nav a:hover {
     color: #999;
 }
 
-main nav a.left {
+nav a.left {
     float: left;
 }
 
-main nav a.left i {
+nav a.left i {
     padding-right: 1em;
     font-size: .8em;
 }
 
-main nav a.right {
+nav a.right {
     float: right;
 }
 
-main nav a.right i {
+nav a.right i {
     padding-left: 1em;
     font-size: .8em;
 }
@@ -2916,6 +3004,12 @@ footer section aside {
     float: left;
 }
 
+@media only screen and (max-width: 480px) {
+    footer section aside {
+        float: none;
+    }
+}
+
 footer section aside:first-child {
     width: 300px;
 }
@@ -2930,4 +3024,4 @@ footer section aside h4 {
     margin: 0 0 1em 0;
 }
 
-/*# sourceMappingURL=D:/Dropbox/development/Personal/upnxt.blog/Blog//public/css/site.less.map */
+/*# sourceMappingURL=D:/Dropbox/development/Personal/upnxt-blog//public/css/site.less.map */
