@@ -1,6 +1,7 @@
 ﻿<!doctype html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>@(model.meta ? model.meta.title : model.title) | UPNXT</title>
     <link rel="stylesheet" type="text/css" href="/css/true/site.css" />
 
