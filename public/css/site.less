@@ -395,26 +395,31 @@ footer {
         }
     }
 
+    @media only screen and (max-width: 480px) {
+        padding: 2em 1em;
+    }
+
     section {
-        width: @section-width;
+        width: auto;
+        max-width: @section-width;
         margin: 0 auto;
 
         &:after {
             .clear-after();
         }
 
+        @media only screen and (max-width: 480px) {
+            margin: 0;
+        }
+
         aside {
             float: left;
-
-            @media only screen and (max-width: 480px) {
-                float: none;
-            }
 
             &:first-child {
                 width: 300px;
             }
 
-            &:nth-child(2), &:last-child {
+            &:last-child {
                 width: 200px;
                 float: right;
             }
@@ -422,6 +427,18 @@ footer {
 
             h4 {
                 margin: 0 0 1em 0;
+            }
+
+
+            @media only screen and (max-width: 480px) {
+
+                float: none; &:first-child {
+                    padding-bottom: 3em;
+                }
+
+                &:last-child {
+                    float: none;
+                }
             }
         }
     }

@@ -2986,8 +2986,15 @@ footer a:hover {
     color: #999;
 }
 
+@media only screen and (max-width: 480px) {
+    footer {
+        padding: 2em 1em;
+    }
+}
+
 footer section {
-    width: 800px;
+    width: auto;
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -2999,21 +3006,20 @@ footer section:after {
     clear: both;
 }
 
-footer section aside {
-    float: left;
+@media only screen and (max-width: 480px) {
+    footer section {
+        margin: 0;
+    }
 }
 
-@media only screen and (max-width: 480px) {
-    footer section aside {
-        float: none;
-    }
+footer section aside {
+    float: left;
 }
 
 footer section aside:first-child {
     width: 300px;
 }
 
-footer section aside:nth-child(2),
 footer section aside:last-child {
     width: 200px;
     float: right;
@@ -3021,6 +3027,20 @@ footer section aside:last-child {
 
 footer section aside h4 {
     margin: 0 0 1em 0;
+}
+
+@media only screen and (max-width: 480px) {
+    footer section aside {
+        float: none;
+    }
+
+    footer section aside:first-child {
+        padding-bottom: 3em;
+    }
+
+    footer section aside:last-child {
+        float: none;
+    }
 }
 
 /*# sourceMappingURL=D:/Dropbox/development/Personal/upnxt-blog//public/css/site.less.map */

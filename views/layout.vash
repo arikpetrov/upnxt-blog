@@ -7,8 +7,8 @@
     @if (model.meta)
     {
         <meta name="keywords" content="@model.meta.keywords" />
-        <meta name="description" content="@model.meta.description" />
-        <meta property="og:title" content="@(model.meta ? model.meta.title : model.title)" />
+    <meta name="description" content="@model.meta.description" />
+    <meta property="og:title" content="@(model.meta ? model.meta.title : model.title)" />
     }
 
     <script src="/js/lib/require.min.js"></script>
@@ -36,19 +36,16 @@
 
     <footer>
         <section>
+
+            <aside>
+                <h4>Navigation</h4>
+                <a href="/about-me">About Me</a>, <a href="/">Blog</a>, <a href="https://github.com/upnxt/" target="_blank">Github</a>
+            </aside>
+
             <aside>
                 UPNXT &copy; @(new Date().getFullYear()) All rights reserved.
             </aside>
 
-            <aside>
-                <h4>Navigation</h4>
-                <a href="/aboutme">About Me</a>, <a href="/">Blog</a>, <a href="https://github.com/cl0wnshoes/" target="_blank">Github</a>
-            </aside>
-
-            <aside>
-                <h4>Contact</h4>
-                <a href="#">hello<i class="fa fa-at"></i>upnxt.com</a>
-            </aside>
         </section>
     </footer>
 
