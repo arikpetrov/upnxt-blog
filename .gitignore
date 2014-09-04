@@ -2,6 +2,7 @@
 *obj/
 *.dat
 *.suo
+*iisnode/
 
 # Logs
 logs
