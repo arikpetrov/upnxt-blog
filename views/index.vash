@@ -17,9 +17,9 @@
                     {
                         <h2>References</h2>
                         <ol>
-                            @model.references.forEach(function(ref)
+                            @model.references.forEach(function(ref, index)
                             {
-                                <li><a href="@ref">@ref</a></li>
+                                <li><a href="@ref" name="@(index + 1)">@ref</a></li>
                             })
                         </ol>
                     }
