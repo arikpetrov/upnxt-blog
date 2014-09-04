@@ -1,0 +1,352 @@
+﻿@html.extend("layout", function(model)
+{
+    @html.block("body", function(model)
+    {
+<header class="heading">
+    <h1>A .NET developer's jump into node.js with express + vash + sqlite3</h1>
+</header>
+
+<section>
+    <p class="date">August 30, 2014</p>
+
+    <h2>Summary</h2>
+
+    <p>
+        One of my favorite quotes found in the book <i>The Pragmatic Programmer</i>, Tip #8, "Invest Regularly in Your Knowledge Portfolio", 
+        pops into my head every so often when I'm bumming around:
+    </p>
+
+    <blockquote>
+        Learn at least one new language every year. Different languages solve the same problems in different ways. By 
+        learning several different approaches, you can help broaden your thinking and avoid getting stuck in a rut. 
+        Additionally, learning many languages is far easier now, thanks to the wealth of freely available software on 
+        the Internet.
+    </blockquote>
+
+    <p>
+        Learning a new language each year will never happen for me, but I've broadened the quote to include frameworks and other 
+        layers of the stack which is much more attainable, and extremely relevant to what I'm doing.
+    </p>
+
+    <p>
+        I've decided to learn node.js, which isn't a very big step for me since I'm a full stack developer anyway, and I do love 
+        me some javascript. As with any new language the easiest way for me to really learn it is to do a full blown project, so 
+        I've chosen this blog to be my first node app (oh god).
+    </p>
+
+    <h2>Visual Studio <i class="fa fa-heart" style="padding-left: 8px;"></i></h2>
+
+    <p>
+        Being a .NET developer and fighting with/being let down by various IDEs I've come to the conclusion that I can't live 
+        without Visual Studio; luckily there is a node plugin called nodejstools<a href="#1" class="ref"><sup>[1]</sup></a> in beta 
+        that seems to work well enough.
+    </p>
+
+    <p>
+        Nodejstools comes with pre-built projects, so jumping right into a <span class="code">Basic Express Application</span> is 
+        incredibly easy. One of the first things I did was change out the Jade templating language for vash. I don't feel like learning 
+        the syntax of Jade, and vash<a href="#2" class="ref"><sup>[2]</sup></a> offers the familiar Razor view engine experience.
+    </p>
+
+    <p>
+        Installing vash is simple via the nodejstools npm manager. Search for "vash" and click install, ta-da. Next step is to switch out 
+        the express view engine by changing <span class="code inline">app.set("view engine", "jade");</span> to 
+        <span class="code inline">app.set("view engine", "vash");</span>. In the views folder the .jade files are removed and I create the 
+        layout.vash and index.vash files.
+    </p>
+
+    <h4>layout.vash</h4>
+    <ol class="code">
+        <li>&lt;!doctype html></li>
+        <li>&lt;html></li>
+        <li class="tab-1">&lt;head></li>
+        <li class="tab-2">&lt;title>@@<span class="p">model.title</span>&lt;/title></li>
+        <li class="tab-1">&lt;/head></li>
+        <li class="tab-1">&lt;body></li>
+        <li class="tab-2">@@<span class="p">html.block("body")</span></li>
+        <li class="tab-1">&lt;/body></li>
+        <li>&lt;/html></li>
+    </ol>
+
+    <h4>index.vash</h4>
+    <ol class="code">
+        <li>html.extend("layout", function(model)</li>
+        <li>{</li>
+        <li class="tab-1">html.block("body", function(model)</li>
+        <li class="tab-1">{</li>
+        <li class="tab-2">&lt;h1>@@model.body&lt;/h1></li>
+        <li class="tab-1">});</li>
+        <li>});</li>
+    </ol>
+
+    <p>
+        For the Razor aware, you'll probably see some familiar concepts with the @@html.block acting as the RenderBody/RenderPartial 
+        methods. With this simple setup we can copy the index.vash file for our other views to display within the layout.
+    </p>
+
+    <p>
+        While coding the basic boilerplate HTML/vash I noticed I had lost syntax highlighting and formatting, doh! In Visual Studio 
+        (I could not for the life of me get this to work in WebStorm) I can associate the .vash files to the "HTML (Web forms) Editor" 
+        editing experience and get HTML highlighting again.
+    </p>
+
+    <img src="/images/posts/vash_extension.png" />
+
+
+    <h2>Routing</h2>
+    <p>
+        Next item to tackle was routing. The express app creates an index route in <span class="file"><i class="fa fa-file-o"></i>app.js</span>
+        <span class="code inline">app.get("/", routes.index);</span>. After creating a couple more routes I could see how app.js could start 
+        filling up with unnecessary calls. I found what I think so far is a cleaner way of handling routes by abstracting the http verb 
+        calls into the route files.
+    </p>
+
+    <p>
+        In <span class="file"><i class="fa fa-file-o"></i>app.js</span> I removed <span class="code inline">var routes = require("./routes");</span> and 
+        <span class="code inline">app.get("/", routes.index);</span>. Directly under <span class="code inline">app.use(app.router)</span>
+        I add <span class="code inline">require("./routes")(app);</span> and replace everything in <span class="file"><i class="fa fa-file-o"></i>routes/index.js</span>
+        with the following:
+    </p>
+
+    <ol class="code">
+        <li>module.exports = function ( app )</li>
+        <li>&#123;</li>
+        <li class="tab-1">app.get("/", function ( req, res )</li>
+        <li class="tab-1">&#123;</li>
+        <li class="tab-2">res.render("index", &#123; title: "Time for some dreets you guys.", body: ":D" &#125;);</li>
+        <li class="tab-1">&#125;&#041;;</li>
+        <li>&#125;);</li>
+    </ol>
+
+    <p>
+        If all goes well when running the site again you should see ":D" in the view pane, and see "Time for some dreets you guys" in the 
+        page title.
+    </p>
+
+    <p>
+        To add another route such as /about we can add another line <span class="code inline">require("./routes/about")(app);</span>, create 
+        <span class="file"><i class="fa fa-file-o"></i>routes/about.js</span>, and place in the following code:
+    </p>
+
+    <ol class="code">
+        <li>module.exports = function ( app )</li>
+        <li>{</li>
+        <li class="tab-1">app.get( "/about-me", function ( req, res )</li>
+        <li class="tab-1">{</li>
+        <li class="tab-2">res.render( "aboutme", {</li>
+        <li class="tab-3">themeClass: "none",</li>
+        <li class="tab-3">title: "aboutme"</li>
+        <li class="tab-2">});</li>
+        <li class="tab-1">});</li>
+        <li>}</li>
+    </ol>
+
+    <h2>Working with data</h2>
+    <p>
+        I decided to try and work in a repository pattern with a service (damn right we're going to over engineer this, enterprise4lyfe). I 
+        have a <span class="code inline">PostService</span>, a base <span class="code inline">Repository</span> that handles the basic sqlite 
+        commands, and a specific <span class="code inline">PostRepository</span> the handles all requests pertaining to blog posts.
+    </p>
+
+    <p>
+        The <span class="code">PostService</span> has two methods, <span class="code">getLatest(callback)</span>, and <span class="code">getByUrl(url, callback)</span> for displaying posts.
+    </p>
+
+    <ol class="code">
+        <li>var PostRepository = require( "../data/PostRepository" );</li>
+        <li></li>
+        <li>var PostService = function ()</li>
+        <li>{</li>
+        <li class="tab-1">var repo = new PostRepository();</li>
+        <li>&nbsp;</li>
+        <li class="tab-1">return {</li>
+        <li>&nbsp;</li>
+        <li class="tab-2">getLatest: function ( callback )</li>
+        <li class="tab-2">{</li>
+        <li class="tab-3">repo.getLatest( function ( err, post )</li>
+        <li class="tab-3">{</li>
+        <li class="tab-4">callback( err, post );</li>
+        <li class="tab-3">});</li>
+        <li class="tab-2">},</li>
+        <li>&nbsp;</li>
+        <li class="tab-2">getByUrl: function ( url, callback )</li>
+        <li class="tab-2">{</li>
+        <li class="tab-3">repo.getByUrl( url, function ( err, post )</li>
+        <li class="tab-3">{</li>
+        <li class="tab-4">callback( err, post );</li>
+        <li class="tab-3">});</li>
+        <li class="tab-2">}</li>
+        <li class="tab-1">}</li>
+        <li>};</li>
+        <li>&nbsp;</li>
+        <li>module.exports = PostService;</li>
+    </ol>
+
+    <p>
+        For this project I decided to go with sqlite as it doesn't require any installation, and is one of, if not the 
+        fastest<a href="#3" class="ref"><sup>[3]</sup></a> relational database platform for small projects like this. I abstracted 
+        out basic commands to make it easier to switch out my database incase this provider didn't work as I expected, and to make
+        it easier to refactor when I figure out how unit testing works in node.
+    </p>
+
+    <ol class="code">
+        <li>var fs = require( "fs" );</li>
+        <li>var sqlite3 = require( "sqlite3" );</li>
+        <li>&nbsp;</li>
+        <li>var Repository = function ( callback )</li>
+        <li>{</li>
+        <li class="tab-1">var database_name = "./data/upnxt.db";</li>
+        <li class="tab-1">var dbInstance = null;</li>
+        <li>&nbsp;</li>
+        <li class="tab-1">fs.exists( database_name, function ( exists )</li>
+        <li class="tab-1">{</li>
+        <li class="tab-2">if ( !exists )</li>
+        <li class="tab-3">throw ( "Database not found" );</li>
+        <li class="tab-1">});</li>
+        <li>&nbsp;</li>
+        <li class="tab-1">function using( callback )</li>
+        <li class="tab-1">{</li>
+        <li class="tab-2">dbInstance = new sqlite3.cached.Database( database_name );</li>
+        <li class="tab-2">callback( dbInstance );</li>
+        <li class="tab-1">};</li>
+        <li>&nbsp;</li>
+        <li class="tab-1">return {</li>
+        <li>&nbsp;</li>
+        <li class="tab-2">all: function ( query, callback )</li>
+        <li class="tab-2">{</li>
+        <li class="tab-3">using( function ( db )</li>
+        <li class="tab-3">{</li>
+        <li class="tab-4">db.all( query, callback );</li>
+        <li class="tab-3">});</li>
+        <li class="tab-2">},</li>
+        <li>&nbsp;</li>
+        <li class="tab-2">get: function ( query, data, callback )</li>
+        <li class="tab-2">{</li>
+        <li class="tab-3">using( function ( db )</li>
+        <li class="tab-3">{</li>
+        <li class="tab-4">db.get( query, data, callback );</li>
+        <li class="tab-3">});</li>
+        <li class="tab-2">}</li>
+        <li class="tab-1">}</li>
+        <li>};</li>
+        <li>&nbsp;</li>
+        <li>module.exports = Repository;</li>
+    </ol>
+
+    <p>
+        For lack of a better name, I created a using function to new up a database instance for the current call. When I'm more 
+        familiar with node I'd like to turn it into a per http request instance.
+    </p>
+
+    <p>
+        The heavy lifter in my data access is the <span class="code inline">PostRepository</span>. This repo hands off data specifically 
+        manipulated for each service call. For me, this helps keep my data flow organized and precise. By using the base repository 
+        directly in my service, or calling a database directly in my service I open myself up for over-sized objects that are harder to
+        manage, and makes my life miserable when it's time to figure out how unit tests work.
+    </p>
+
+    <p>
+        The <span class="code inline">PostRepository</span> is a little long to post in its entirety, but the basic concept hopefully 
+        comes across in the code snippet below.
+    </p>
+
+    <ol class="code">
+        <li>getByUrl: function ( url, callback )</li>
+        <li>{</li>
+        <li class="tab-1">post = { next: null, prev: null, references: [] };</li>
+        <li>&nbsp;</li>
+        <li class="tab-1">repo.all( </li>
+        <li class="tab-2">"SELECT "+</li>
+        <li class="tab-3">"P.Id, P.Url, P.Title, P.Body, P.LinkText, P.MetaTitle, P.MetaKeywords, P.MetaDescription, P.CreatedOn, P.GithubLink, "+</li>
+        <li class="tab-3">"PR.Reference "+</li>
+        <li class="tab-2">"FROM POSTS P "+</li>
+        <li class="tab-2">"LEFT OUTER JOIN PostReferences PR ON P.Id = PR.PostId "+</li>
+        <li class="tab-2">"WHERE "+</li>
+        <li class="tab-3">"P.IsPublished = 1 "+</li>
+        <li class="tab-3">"AND P.Url = $url "+</li>
+        <li class="tab-2">"ORDER BY P.CreatedOn DESC", { $url: url }, function ( err, rows )</li>
+        <li class="tab-2">{</li>
+        <li class="tab-3">if ( rows && rows.length > 0 )</li>
+        <li class="tab-3">{</li>
+        <li class="tab-4">buildPost( rows[0] );</li>
+        <li class="tab-4">buildReferences( rows );</li>
+        <li>&nbsp;</li>
+        <li class="tab-4">getNextPrev( repo, url, function ()</li>
+        <li class="tab-4">{</li>
+        <li class="tab-5">callback( null, post );</li>
+        <li class="tab-4">});</li>
+        <li class="tab-3">}</li>
+        <li class="tab-2">});</li>
+        <li>}</li>
+    </ol>
+
+    <p>
+        I use node-sqlite3's <span class="code inline">.all</span> method in this instance due to there being multiple rows returned because 
+        of my the join. In the callback the buildPost function maps my entity to the post object I'm returning, and then builds out the 
+        references array. The getNextPrev function is passed the repository instance and I find the next and previous blog posts to create 
+        navigation near the page footer.
+    </p>
+
+    <p>
+        So far I haven't found a great way with sqlite to do next/prev records, so unfortunately I'm making three database calls on each 
+        page load. Lucky for me I'll probably never have more than one person on the site at a time, and I'll probably have less than 100 
+        records, so I'll throw optimization to the wind for now.
+    </p>
+
+
+    <h2>The Leftovers</h2>
+    <p>
+        The last basic necessities for my site is error pages. Using the same method as earlier with the routes, but after 
+        <span class="code inline">app.use(express.static(path.join(__dirname, 'public')));</span> I insert 
+        <span class="code inline">require('./routes/error')(app);</span>. This needs to come after the public static path otherwise this 
+        route will be riddled with asset calls (image & styles) since no path is provided.
+    </p>
+
+    <p>
+        In <span class="file"><i class="fa fa-file-o"></i>routes/error.js</span> the follow code will route the request to <span class="file"><i class="fa fa-file-o"></i>views/404.vash</span>
+        or <span class="file"><i class="fa fa-file-o"></i>views/500.vash</span>.
+    </p>
+
+    <ol class="code">
+        <li>module.exports = function ( app )</li>
+        <li>{</li>
+        <li class="tab-1">app.use( function ( req, res )</li>
+        <li class="tab-1">{</li>
+        <li class="tab-2">res.status( 400 );</li>
+        <li class="tab-2">res.render( "404.vash", {});</li>
+        <li class="tab-1">});</li>
+        <li>&nbsp;</li>
+        <li class="tab-1">app.use( function ( error, req, res, next )</li>
+        <li class="tab-1">{</li>
+        <li class="tab-2">res.status( 500 );</li>
+        <li class="tab-2">res.render( "500.vash", {});</li>
+        <li class="tab-1">});</li>
+        <li>}</li>
+    </ol>
+
+    <p>
+        Each view has static content so for now I'm passing an empty object. 
+    </p>
+
+
+    <h2>Conclusion</h2>
+    <p>
+        My experience with node so far has gone alright. I have concerns about callback chaining and the impact it will have on refactoring. 
+        I feel like I'm putting more effort than I should into doing simple tasks, writing myself into a giant plate of spaghetti code. 
+        I'll chalk up my experiences thus far to inexperience.
+    </p>
+
+    <p>
+        The nodejstools plugin for Visual Studio has a ways to go. I had stability issues with Visual Studio, NPM manager would seemingly 
+        randomly stop working until I restarted Visual Studio, and the package manager no longer gives me search results. It is in beta so 
+        I'll give it some time, but I'll probably end up moving to Sublime or WebStorm for node development.
+    </p>
+
+    <p>
+        I'm going to take the post topic a bit further with a search provider and archive section so we'll see how it goes from here. You can view 
+        this project as a whole in my blog's github account, along with any other code snippets my posts contain in the future. 
+    </p>
+</section>
+
+})
+})

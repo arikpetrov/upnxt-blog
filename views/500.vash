@@ -1,0 +1,10 @@
+﻿@html.extend("layout", function(model)
+{
+    @html.block("body", function(model)
+    {
+        <section>
+            <h1>Server Error :(</h1>
+            <p>Let's just pretend that didn't happen... why don't you just make <a href="/">your way back</a> to the home page?</p>
+        </section>
+    })
+})

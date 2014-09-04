@@ -1,0 +1,17 @@
+{
+  "name": "Web",
+  "version": "0.0.0",
+  "description": "Web",
+  "main": "app.js",
+  "author": {
+    "name": "clint",
+    "email": ""
+  },
+  "dependencies": {
+    "express": "^3.16.9",
+    "less": "^1.7.4",
+    "moment": "^2.8.2",
+    "sqlite3": "^2.2.7",
+    "vash": "^0.7.12-1"
+  }
+}

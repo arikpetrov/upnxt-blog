@@ -1,0 +1,52 @@
+﻿@html.extend("layout", function(model)
+{
+    @html.block("body", function(model)
+    {
+        <header class="heading">
+            <h1>@model.title</h1>
+        </header>
+
+        <section>
+            <p class="date">@model.createdOn</p>
+            @html.raw(model.body)
+
+            @if (model.githubLink || model.references.length > 0)
+            {
+                <section class="references">
+                    @if (model.references.length > 0)
+                    {
+                        <h2>References</h2>
+                        <ol>
+                            @model.references.forEach(function(ref)
+                            {
+                                <li><a href="@ref">@ref</a></li>
+                            })
+                        </ol>
+                    }
+
+                    @if (model.githubLink)
+                    {
+                        <h2><i class="fa fa-github-alt"></i>Github</h2>
+                        <ul>
+                            <li><a href="@model.githubLink">@model.githubLink</a></li>
+                        </ul>
+                    }
+                </section>
+            }
+        </section>
+
+        <nav>
+            <section>
+                @if (model.prev)
+                {
+                    <a href="/blog/@model.prev.url" class="left"><i class="fa fa-angle-left"></i>@model.prev.linkText</a>
+                }
+
+                @if (model.next)
+                {
+                    <a href="/blog/@model.next.url" class="right">@model.next.linkText<i class="fa fa-angle-right"></i></a>
+                }
+            </section>
+        </nav>
+})
+})
