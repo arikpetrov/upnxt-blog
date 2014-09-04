@@ -2653,6 +2653,12 @@ header a:hover {
     color: #fff;
 }
 
+@media only screen and (max-width: 480px) {
+    header a {
+        padding: 12px 22px;
+    }
+}
+
 header #menu {
     float: left;
 }
@@ -2720,24 +2726,18 @@ main header h1 {
     }
 
     main header h1 {
-        font-size: 1em;
+        font-size: 2em;
         width: 90%;
-        font-weight: 600;
+        font-weight: 300;
     }
 }
 
 main section {
-    width: 800px;
+    width: auto;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 3em 0;
+    padding: 3em 1em;
     position: relative;
-}
-
-@media only screen and (max-width: 480px) {
-    main section {
-        width: auto;
-        padding: 3em 1em;
-    }
 }
 
 main section h1 {
@@ -2751,7 +2751,6 @@ main section h2 {
 
 main section h2 i {
     padding-right: 8px;
-    color: red;
 }
 
 main section blockquote {

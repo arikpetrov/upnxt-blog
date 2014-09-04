@@ -74,6 +74,10 @@ header {
             background: @blue-reg;
             color: #fff;
         }
+
+        @media only screen and (max-width: 480px) {
+            padding: 12px 22px;
+        }
     }
 
     #menu {
@@ -140,22 +144,19 @@ main {
         @media only screen and (max-width: 480px) {
 
             padding: 60px 0; h1 {
-                font-size: 1em;
+                font-size: 2em;
                 width: 90%;
-                font-weight: 600;
+                font-weight: 300;
             }
         }
     }
 
     section {
-        width: @section-width;
+        width: auto;
+        max-width: @section-width;
         margin: 0 auto;
-        padding: 3em 0;
+        padding: 3em 1em;
         position: relative;
-
-        @media only screen and (max-width: 480px) {
-            width: auto; padding: 3em 1em;
-        }
 
         h1 {
             font-weight: 300;
@@ -167,7 +168,6 @@ main {
 
             i {
                 padding-right: 8px;
-                color: red;
             }
         }
 
