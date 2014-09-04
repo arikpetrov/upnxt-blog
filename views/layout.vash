@@ -22,7 +22,7 @@
     <header>
         <ul id="menu">
             <li><a href="/" class="active">Blog</a></li>
-            <li><a href="/aboutme">About Me</a></li>
+            <li><a href="/about-me">About Me</a></li>
         </ul>
 
         <ul id="social">

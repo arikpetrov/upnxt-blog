@@ -3,7 +3,9 @@
     @html.block("body", function(model)
     {
         <section>
-            <h1>about me</h1>
+            <h1>About me</h1>
+
+            <p>I'm a full stack developer focusing mainly on C#/MVC in the Kansas City area.</p>
         </section>
     })
 })
