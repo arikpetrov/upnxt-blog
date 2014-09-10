@@ -56,6 +56,7 @@
     <Content Include="public\css\fonts\glyphicons-social-regular.otf" />
     <Content Include="public\css\fonts\glyphicons-social-regular.ttf" />
     <Content Include="public\css\normalize.less" />
+    <Content Include="public\css\site.css" />
     <Content Include="public\css\site.less" />
     <Content Include="public\css\True\fonts.css" />
     <Content Include="public\css\True\fonts.min.css" />

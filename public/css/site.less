@@ -233,9 +233,15 @@ main {
                 color: #90ee90;
             }
 
-            span.tag {
+            span.tag, span.c {
                 color: #30c4ff;
             }
+
+            span.val {
+                color: #F3F;
+            }
+
+            span.i { color: #D7D7D7; }
         }
 
         ol.code {
@@ -248,6 +254,7 @@ main {
 
             li {
                 display: block;
+                min-height: 14px;
 
 
                 &.tab-1 {
@@ -273,7 +280,7 @@ main {
         }
 
         span.inline {
-            span.at, span.p, span.fn, span.tag {
+            span.at, span.p, span.fn, span.tag, span.i {
                 color: #5e5e5d;
             }
         }
