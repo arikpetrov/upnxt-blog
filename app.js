@@ -16,7 +16,6 @@ app.use(app.router);
 
 require('./routes')(app);
 require('./routes/aboutme')(app);
-require('./routes/temp')(app);
 
 app.use(express.static(path.join(__dirname, 'public')));
 

@@ -42,7 +42,6 @@
     <Compile Include="public\js\lib\knockout.min.js" />
     <Compile Include="public\js\lib\require.min.js" />
     <Compile Include="routes\error.js" />
-    <Compile Include="routes\temp.js" />
     <Compile Include="routes\aboutme.js" />
     <Compile Include="routes\index.js" />
     <Content Include="data\upnxt.db" />
@@ -74,7 +73,6 @@
     <Content Include="README.md" />
     <Content Include="views\500.vash" />
     <Content Include="views\404.vash" />
-    <Content Include="views\temp.vash" />
     <Content Include="views\aboutme.vash" />
     <Content Include="views\index.vash" />
     <Content Include="views\layout.vash" />
